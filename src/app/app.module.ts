@@ -3,24 +3,31 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { CounterComponent } from './counter/counter.component';
+import { TodoApp } from './app.component';
+
+import { FilterSelect } from './components/filter-select';
+import { TodoInput } from './components/todo-input';
+import { TodoList } from './components/todo-list';
+
+
 import { StoreModule } from '@ngrx/store';
 
-import {counter} from './store/counter.reducer';
+import {visibilityFilter, todos} from './store/reducers';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CounterComponent
+    TodoApp,
+    FilterSelect,
+    TodoInput,
+    TodoList
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({counter})
+    StoreModule.provideStore({visibilityFilter, todos})
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [TodoApp]
 })
 export class AppModule { }
