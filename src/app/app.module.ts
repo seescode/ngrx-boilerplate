@@ -2,25 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
-import { CounterComponent } from './counter/counter.component';
 import { StoreModule } from '@ngrx/store';
 
-import {counter} from './store/counter.reducer';
+import { AsyncApp } from './async-app';
+
+import {RedditModel} from "./services/reddit-model";
+import {RedditSelect} from "./components/reddit-select";
+import {RedditList} from "./components/reddit-list";
+import {RefreshButton} from "./components/refresh-button";
+
+import {selectedReddit, postsByReddit} from "./store/reddit";
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CounterComponent
+    RedditList,
+    RedditSelect,
+    RefreshButton,
+    AsyncApp
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({counter})
+    StoreModule.provideStore({selectedReddit, postsByReddit})
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [RedditModel],
+  bootstrap: [AsyncApp]
 })
 export class AppModule { }
