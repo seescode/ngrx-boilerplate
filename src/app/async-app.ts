@@ -42,6 +42,7 @@ export class AsyncApp {
 	){}
 
 	selectReddit(reddit: string){
+      console.log('selected reddit', reddit);
         this._store.dispatch({type: SELECT_REDDIT, payload: reddit});
     }
 
