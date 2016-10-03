@@ -5,32 +5,34 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { AsyncApp } from './async-app';
-
-import {RedditModel} from "./services/reddit-model";
-import {Reddit} from "./services/reddit";
-import {RedditSelect} from "./components/reddit-select";
-import {RedditList} from "./components/reddit-list";
-import {RefreshButton} from "./components/refresh-button";
-
-import {selectedReddit, postsByReddit} from "./store/reddit";
-import {RedditEffects} from "./store/reddit-effects";
 
 
+import {ProductList} from './components/product-list';
+import {CartList} from './components/cart-list';
+import {ProductItem} from './components/product-item';
+import {CartItem} from './components/cart-item';
+
+import {ShoppingCartApp} from './shoppingCart-app';
+
+
+import {getProductsAsArry, getCalculatedCartList} from './reducers';
+
+import { ShopEffects } from './effects/shop';
 
 
 @NgModule({
   declarations: [
-    RedditList,
-    RedditSelect,
-    RefreshButton,
-    AsyncApp
+    ProductList,
+    CartList,
+    ShoppingCartApp,
+    ProductItem,
+    CartItem
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({selectedReddit, postsByReddit}),
+    StoreModule.provideStore({getProductsAsArry, getCalculatedCartList}),
     /**
      * runEffects configures all providers for @ngrx/effects. Observables decorated
      * as an @Effect() within the supplied services will ultimately be merged,
@@ -40,9 +42,9 @@ import {RedditEffects} from "./store/reddit-effects";
      *
      * Source: https://github.com/ngrx/effects/blob/master/lib/run-effects.ts#L8-L20
      */
-    EffectsModule.run(RedditEffects),
+    EffectsModule.run(ShopEffects),
   ],
-  providers: [RedditModel, Reddit],
-  bootstrap: [AsyncApp]
+  //providers: [RedditModel, Reddit],
+  bootstrap: [ShoppingCartApp]
 })
 export class AppModule { }

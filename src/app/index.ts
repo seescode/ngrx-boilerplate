@@ -1,2 +1,2 @@
-export * from './async-app';
+export * from './shoppingCart-app';
 export * from './app.module';
