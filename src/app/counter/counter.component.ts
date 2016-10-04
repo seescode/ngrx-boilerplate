@@ -3,6 +3,8 @@
 import {Component, ChangeDetectionStrategy} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Observable";
+import { autorun } from 'mobx';
+import { State } from '../store/state.service';
 
 @Component({
   selector: 'app-counter',
@@ -12,16 +14,14 @@ import {Observable} from "rxjs/Observable";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent {
-  counter$: Observable<number>;
+  counter = 0;
 
   constructor(
-    private store: Store<number>
+    private state: State
   ) {
-    /*
-        Select returns an observable of the appropriate slice of state (reducer) from store.
-        This is equivalent to store.map(state => state['counter']).distinctUntilChanged()
-     */
-    this.counter$ = this.store.select<number>('counter')
+    autorun(() => {
+      this.counter = this.state.count;
+    })
   }
   /*
       The only way to modify state in store is through dispatched actions.
@@ -31,22 +31,22 @@ export class CounterComponent {
       of that particular section of state.
    */
   increment() {
-    this.store.dispatch({ type: 'INCREMENT' });
+    this.state.add();
   }
 
   decrement() {
-    this.store.dispatch({ type: 'DECREMENT' });
+    this.state.remove();
   }
 
   incrementAsync() {
     setTimeout(() => {
-      this.store.dispatch({ type: 'INCREMENT' });
+      this.state.add();
     }, 1000);
   }
 
   decrementAsync() {
     setTimeout(() => {
-      this.store.dispatch({ type: 'DECREMENT' });
+      this.state.remove();
     }, 1000);
   }
 }

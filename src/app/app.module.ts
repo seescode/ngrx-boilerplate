@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CounterComponent } from './counter/counter.component';
 import { StoreModule } from '@ngrx/store';
 
-import {counter} from './store/counter.reducer';
+import { State } from './store/state.service';
 
 @NgModule({
   declarations: [
@@ -17,10 +17,9 @@ import {counter} from './store/counter.reducer';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    StoreModule.provideStore({counter})
+    HttpModule
   ],
-  providers: [],
+  providers: [State],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
