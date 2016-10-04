@@ -7,7 +7,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
         <label for="name">Todo Description:</label>
         <input #todo type="text" placeholder="Enter Todo...">
       </div>
-      <button 
+      <button
         class="pure-button pure-button-primary"
         (click)="add(todo)">
             Add Todo

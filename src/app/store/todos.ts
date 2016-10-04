@@ -1,30 +1,26 @@
-import {ActionReducer, Action} from "@ngrx/store";
 import {Todo} from "../common/interfaces";
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from "../common/actions";
+import { observable, computed } from 'mobx';
 
-export const todos : ActionReducer<Todo[]> = (state : Todo[] = [], action: Action) => {
-  switch(action.type) {
-      case ADD_TODO:
-          return [
-              ...state,
-              action.payload
-          ];
+export default class Todos {
+  @observable todos : Todo[] = [];
 
-      case REMOVE_TODO:
-          return state.filter(todo => todo.id !== action.payload);
-
-      case TOGGLE_TODO:
-          return state.map(todo => {
-            if(todo.id !== action.payload){
-               return todo;
-            }
-            return Object.assign({}, todo, {
-                complete: !todo.complete
-            });
-          });
-
-      default:
-          return state;
+  add(todo) {
+    this.todos.push(todo);
   }
-};
 
+  remove(id) {
+    this.todos = this.todos.filter(todo => todo.id !== id);
+  }
+
+  toggle(id) {
+    this.todos.forEach(function(todo) {
+      if (todo.id === id) {
+        todo.complete = !todo.complete
+      }
+    });
+  }
+
+  @computed get totalCompleted() {
+    return this.todos.filter(n => n.complete).length;
+  }
+}

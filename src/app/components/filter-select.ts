@@ -15,9 +15,9 @@ import {Todo} from "../common/interfaces";
 })
 export class FilterSelect{
     public filters = [
-        {friendly: "All", action: 'SHOW_ALL'},
-        {friendly: "Completed", action: 'SHOW_COMPLETED'},
-        {friendly: "Active", action: 'SHOW_ACTIVE'}
+        {friendly: "All", action: 2},
+        {friendly: "Completed", action: 0},
+        {friendly: "Active", action: 1}
     ];
     @Output() filterSelect: EventEmitter<string> = new EventEmitter<string>();
 }

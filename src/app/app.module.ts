@@ -12,7 +12,8 @@ import { TodoList } from './components/todo-list';
 
 import { StoreModule } from '@ngrx/store';
 
-import {visibilityFilter, todos} from './store/reducers';
+import Todos from './store/todos';
+import VisibilityFilter from './store/visibility-filter';
 
 @NgModule({
   declarations: [
@@ -24,10 +25,9 @@ import {visibilityFilter, todos} from './store/reducers';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    StoreModule.provideStore({visibilityFilter, todos})
+    HttpModule
   ],
-  providers: [],
+  providers: [Todos, VisibilityFilter],
   bootstrap: [TodoApp]
 })
 export class AppModule { }

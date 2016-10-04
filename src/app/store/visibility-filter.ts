@@ -1,19 +1,28 @@
-import {ActionReducer, Action} from "@ngrx/store";
-import {SHOW_COMPLETED, SHOW_ACTIVE, SHOW_ALL} from "../common/actions";
+import { observable, computed } from 'mobx';
 
-export const visibilityFilter : ActionReducer<any> = (state : any = t => t, action : Action) => {
-    switch(action.type){
-        case SHOW_COMPLETED:
-            return todo => todo.complete;
+export const SHOW_COMPLETED = 0;
+export const SHOW_ACTIVE = 1;
+export const SHOW_ALL = 2;
 
-        case SHOW_ACTIVE:
-            return todo => !todo.complete;
+export default class VisibilityFilter {
+  @observable current = SHOW_ALL;
 
-        case SHOW_ALL:
-            return todo => todo;
 
-        default:
-            return state;
+  set(val) {
+    this.current = val;
+  }
+
+  @computed get filterFunction() {
+    switch (parseInt(this.current)) {
+      case SHOW_COMPLETED:
+        return todo => todo.complete;
+
+      case SHOW_ACTIVE:
+        return todo => !todo.complete;
+
+      case SHOW_ALL:
+      default:
+        return todo => todo;
     }
-};
-
+  }
+}

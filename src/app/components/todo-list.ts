@@ -3,7 +3,7 @@ import {Todo, TodoModel} from "../common/interfaces";
 
 @Component({
     selector: 'todo-list',
-    template: `  
+    template: `
         <strong>Completed: {{todosModel.completedTodos}}/{{todosModel.totalTodos}}
         <ul>
             <li class="margin-t-20" *ngFor="let todo of todosModel.filteredTodos">
