@@ -6,10 +6,9 @@ import {IProduct} from '../reducers/products';
     template: `
     <li class="margin-t-20">
         <div>{{product.title}} - {{product.price}}</div>
+        <div>{{product.inventory}} left</div>
         <button class="pure-button pure-button-primary"
-            (click)="addToCart.emit(product)"
-            [disabled]="product.inventory < 1">
-            {{product.inventory < 1 ? "Out of Stock" : "Add to Cart"}}
+            (click)="add(product)"
         </button>
     </li>
     `,
@@ -17,5 +16,11 @@ import {IProduct} from '../reducers/products';
 })
 export class ProductItem {
     @Input() product: IProduct;
-    @Output() addToCart: EventEmitter<IProduct> = new EventEmitter<IProduct>();
+    @Output() addToCart: EventEmitter<IProduct>
+      = new EventEmitter<IProduct>();
+
+    add(product: IProduct) {
+      product.inventory = product.inventory - 1;
+      this.addToCart.emit(product);
+    }
 }
