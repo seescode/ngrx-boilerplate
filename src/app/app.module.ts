@@ -15,7 +15,7 @@ import {CartItem} from './components/cart-item';
 import {ShoppingCartApp} from './shoppingCart-app';
 
 
-import {getProductsAsArry, getCalculatedCartList} from './reducers';
+import main from './reducers';
 
 import { ShopEffects } from './effects/shop';
 
@@ -32,7 +32,7 @@ import { ShopEffects } from './effects/shop';
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({getProductsAsArry, getCalculatedCartList}),
+    StoreModule.provideStore(main),
     /**
      * runEffects configures all providers for @ngrx/effects. Observables decorated
      * as an @Effect() within the supplied services will ultimately be merged,

@@ -15,6 +15,9 @@ const initialState: CartState = {
 }
 
 export default function (state = initialState, action: Action): CartState {
+
+    console.log('cart reducer', state, action);
+
     switch (action.type) {
         case ADD_TO_CART:
             if (state.productIds.indexOf(action.payload) !== -1) {

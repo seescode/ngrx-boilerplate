@@ -42,6 +42,10 @@ export class ShoppingCartApp {
     checkoutAction = checkout;
 
     constructor(public store: Store<any>) {
+
+        // console.log("dispatching");
+        // store.dispatch(getProducts());
+
         this.products = store.let(getProductsAsArry());
         this.cartList = store.let(getCalculatedCartList());
 

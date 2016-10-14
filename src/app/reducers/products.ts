@@ -19,10 +19,20 @@ export interface ProductsState {
 }
 
 const initialState: ProductsState = {
-    entities: {}
+    entities: {
+      // "abc": {
+      //     id: 1,
+      //     inventory: 2,
+      //     price: 3,
+      //     title: 'food'
+      // }
+  }
 };
 
-export default function (state = initialState, action: Action): ProductsState {
+export default function (state : ProductsState = initialState, action: Action): ProductsState {
+
+    console.log('products reducer', state, action);
+
     switch (action.type) {
         case RECEIVED_PRODUCTS:
             return {
