@@ -56,14 +56,3 @@ export default function (state : ProductsState = initialState, action: Action): 
             return state;
     }
 };
-
-export function getProductEntities() {
-    return (state$: Observable<ProductsState>) => state$
-        .select(s => s.entities);
-}
-
-export function getProductsAsArry() {
-    return (state$: Observable<ProductsState>) => state$
-        .let(getProductEntities())
-        .map(res => Object.keys(res).map(key => res[key]));
-}

@@ -3,8 +3,6 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 
-import { compose } from '@ngrx/core/compose';
-
 import cartReducer, * as fromCart from './cart';
 import productsReducer, * as fromProducts from './products';
 
@@ -30,11 +28,14 @@ export function getProductState() {
 
 
 export function getProductEntities() {
-    return compose(fromProducts.getProductEntities(), getProductState());
+    return (state$: Observable<AppState>) => state$
+        .select(s => s.products.entities);
 }
 
 export function getProductsAsArry() {
-    return compose(fromProducts.getProductsAsArry(), getProductState());
+    return (state$: Observable<AppState>) => state$
+        .let(getProductEntities())
+        .map(res => Object.keys(res).map(key => res[key]));
 }
 
 export function getCalculatedCartList() {
