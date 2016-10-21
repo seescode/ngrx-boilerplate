@@ -4,8 +4,6 @@ import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 
 import { compose } from '@ngrx/core/compose';
-import { storeLogger } from 'ngrx-store-logger';
-import { combineReducers } from '@ngrx/store';
 
 import cartReducer, * as fromCart from './cart';
 import productsReducer, * as fromProducts from './products';
@@ -15,11 +13,10 @@ export interface AppState {
     products: fromProducts.ProductsState;
 }
 
-export default compose(storeLogger(), combineReducers)({
+export default {
     cart: cartReducer,
-    products: productsReducer,
-});
-
+    products: productsReducer
+};
 
 export function getCartState() {
     return (state$: Observable<AppState>) => state$
