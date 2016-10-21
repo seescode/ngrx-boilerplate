@@ -5,15 +5,13 @@ import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-
-
 import {ProductList} from './components/product-list';
 import {CartList} from './components/cart-list';
 import {ProductItem} from './components/product-item';
 import {CartItem} from './components/cart-item';
 
 import {ShoppingCartApp} from './shoppingCart-app';
-
+import {StoreService} from './services/store.service';
 
 import main from './reducers';
 
@@ -28,6 +26,7 @@ import { ShopEffects } from './effects/shop';
     ProductItem,
     CartItem
   ],
+  providers: [StoreService],
   imports: [
     BrowserModule,
     FormsModule,

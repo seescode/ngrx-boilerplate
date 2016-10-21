@@ -3,9 +3,8 @@ import {Component, ChangeDetectionStrategy} from '@angular/core';
 import { Subject } from 'rxjs';
 import {Store, Action} from '@ngrx/store';
 
-import {getProducts, addToCart} from './actions/products';
-import {checkout} from './actions/cart';
 import {getProductsAsArry, getCalculatedCartList} from './reducers';
+import { StoreService}from './services/store.service';
 
 
 @Component({
@@ -21,11 +20,11 @@ import {getProductsAsArry, getCalculatedCartList} from './reducers';
 		<div class="content pure-u-1 pure-u-md-3-4">
 			<product-list
 				[products]="(products | async)"
-                (addToCart)="actions$.next(addToCartAction($event))">
+                (addToCart)="addToCart($event)">
 			</product-list>
             <cart-list
 				[cartList]="(cartList | async)"
-                (checkout)="actions$.next(checkoutAction($event))">
+                (checkout)="checkout($event)">
 			</cart-list>
 		</div>
 	</div>
@@ -33,15 +32,10 @@ import {getProductsAsArry, getCalculatedCartList} from './reducers';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartApp {
-
     cartList: any;
     products: any;
-    actions$ = new Subject<Action>();
 
-    addToCartAction = addToCart;
-    checkoutAction = checkout;
-
-    constructor(public store: Store<any>) {
+    constructor(public store: Store<any>, public storeService: StoreService) {
 
         // console.log("dispatching");
         // store.dispatch(getProducts());
@@ -49,7 +43,15 @@ export class ShoppingCartApp {
         this.products = store.let(getProductsAsArry());
         this.cartList = store.let(getCalculatedCartList());
 
-        this.actions$.subscribe(store);
-        this.actions$.next(getProducts());
+        storeService.getProducts();
+    }
+
+    addToCart(product) {
+      this.storeService.addToCart(product);
+    }
+
+    checkout(stuff) {
+      console.log('is this actually used', stuff);
+      this.storeService.checkout(stuff);
     }
 }
