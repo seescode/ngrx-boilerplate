@@ -3,29 +3,23 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 
-import cartReducer, * as fromCart from './cart';
-import productsReducer, * as fromProducts from './products';
+import {CartReducer, CartState} from './cart';
+import {ProductsReducer, ProductsState} from './products';
 
 export interface AppState {
-    cart: fromCart.CartState;
-    products: fromProducts.ProductsState;
+    cart: CartState;
+    products: ProductsState;
 }
 
 export default {
-    cart: cartReducer,
-    products: productsReducer
+    cart: CartReducer,
+    products: ProductsReducer
 };
 
 export function getCartState() {
     return (state$: Observable<AppState>) => state$
         .select(s => s.cart);
 }
-
-export function getProductState() {
-    return (state$: Observable<AppState>) => state$
-        .select(s => s.products);
-}
-
 
 export function getProductEntities() {
     return (state$: Observable<AppState>) => state$

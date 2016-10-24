@@ -14,7 +14,7 @@ const initialState: CartState = {
     productIds: [], quantityById: {}
 }
 
-export default function (state = initialState, action: Action): CartState {
+export function CartReducer (state = initialState, action: Action): CartState {
 
     console.log('cart reducer', state, action);
 

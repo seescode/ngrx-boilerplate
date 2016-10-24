@@ -29,7 +29,7 @@ const initialState: ProductsState = {
   }
 };
 
-export default function (state : ProductsState = initialState, action: Action): ProductsState {
+export function ProductsReducer(state : ProductsState = initialState, action: Action): ProductsState {
 
     console.log('products reducer', state, action);
 
