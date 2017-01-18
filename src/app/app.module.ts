@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { CounterComponent } from './counter/counter.component';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import {counter} from './store/counter.reducer';
 
@@ -18,7 +19,8 @@ import {counter} from './store/counter.reducer';
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({counter})
+    StoreModule.provideStore({counter}),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [],
   bootstrap: [AppComponent]
