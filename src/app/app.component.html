@@ -1,1 +1,2 @@
-<app-counter></app-counter>
+<app-todo (onClick)="addTodo($event)"></app-todo>
+<app-todo-list [todos]="todos$ | async"></app-todo-list>

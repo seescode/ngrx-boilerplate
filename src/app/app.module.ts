@@ -1,25 +1,27 @@
+import { todos } from './store/todos.reducer';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { CounterComponent } from './counter/counter.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TodoComponent } from './todo/todo.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
-import {counter} from './store/counter.reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CounterComponent
+    TodoComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({counter}),
+    StoreModule.provideStore({todos}),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [],
